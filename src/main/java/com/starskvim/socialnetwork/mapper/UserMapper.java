@@ -1,6 +1,6 @@
 package com.starskvim.socialnetwork.mapper;
 
-import com.starskvim.socialnetwork.controller.dto.FriendDto;
+import com.starskvim.socialnetwork.controller.dto.LightUserDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.controller.dto.UserRegistrationDto;
 import com.starskvim.socialnetwork.model.User;
@@ -27,5 +27,5 @@ public abstract class UserMapper {
     public abstract UserDto toUserDto(User user);
 
     @Named("friends")
-    public abstract FriendDto toFriendDto(User user);
+    public abstract LightUserDto toLightUserDto(User user);
 }

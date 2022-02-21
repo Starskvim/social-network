@@ -1,7 +1,7 @@
 package com.starskvim.socialnetwork.controller;
 
 
-import com.starskvim.socialnetwork.controller.dto.FriendDto;
+import com.starskvim.socialnetwork.controller.dto.LightUserDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.service.SocialService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("/find")
     @Operation(summary = "Поиск пользователей", security = @SecurityRequirement(name = "basicAuth"))
-    public List<UserDto> findUsers (@RequestParam(required = false) String searchRequest){
+    public List<LightUserDto> findUsers (@RequestParam(required = false) String searchRequest){
         return socialService.findUsers(searchRequest);
     }
 
@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping("/user/myFriends")
     @Operation(summary = "Получение своих друзей", security = @SecurityRequirement(name = "basicAuth"))
-    public Set<FriendDto> getUserFriends (@ApiIgnore Principal principal){
+    public Set<LightUserDto> getUserFriends (@ApiIgnore Principal principal){
         return socialService.getUserFriends(principal.getName());
     }
 

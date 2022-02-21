@@ -17,5 +17,5 @@ public class UserDto {
     private String mail;
     private String firstName;
     private String lastName;
-    private List<FriendDto> friends = new ArrayList<>();
+    private List<LightUserDto> friends = new ArrayList<>();
 }

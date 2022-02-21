@@ -1,7 +1,7 @@
 package com.starskvim.socialnetwork.service;
 
 
-import com.starskvim.socialnetwork.controller.dto.FriendDto;
+import com.starskvim.socialnetwork.controller.dto.LightUserDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.controller.exceptions.UserAlreadyExistsException;
 import com.starskvim.socialnetwork.controller.exceptions.UserNotFoundException;
@@ -27,13 +27,13 @@ public class SocialService {
     private final UserMapper userMapper;
 
     @Transactional(readOnly = true)
-    public List<UserDto> findUsers (String searchRequest){
+    public List<LightUserDto> findUsers (String searchRequest){
         if(StringUtils.isEmpty(searchRequest)){
             List<User> users = userRepository.findAll();
-            return users.stream().map(userMapper::toUserDto).collect(Collectors.toList());
+            return users.stream().map(userMapper::toLightUserDto).collect(Collectors.toList());
         }
         List<User> users = userRepository.findAllByFullName(searchRequest);
-        return users.stream().map(userMapper::toUserDto).collect(Collectors.toList());
+        return users.stream().map(userMapper::toLightUserDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -46,9 +46,9 @@ public class SocialService {
     }
 
     @Transactional(readOnly = true)
-    public Set<FriendDto> getUserFriends(String name) {
+    public Set<LightUserDto> getUserFriends(String name) {
         User user = userRepository.getUserWithFriends(name);
-        return user.getFriends().stream().map(userMapper::toFriendDto).collect(Collectors.toSet());
+        return user.getFriends().stream().map(userMapper::toLightUserDto).collect(Collectors.toSet());
     }
 
     @Transactional
@@ -58,6 +58,9 @@ public class SocialService {
         }
         User user = userRepository.getUserWithFriends(loginUser);
         User friend = userRepository.getUserWithFriends(loginFriend);
+        if(friend == null){
+            throw new UserNotFoundException(loginFriend);
+        }
         Set<User> userFriendsList = user.getFriends();
         Set<User> friendFriendsList = friend.getFriends();
         if(userFriendsList.contains(friend)){

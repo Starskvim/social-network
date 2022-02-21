@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository <User, Long > {
+public interface UserRepository extends JpaRepository <User, Long> {
 
     @Query("select u from User u where " +
             "lower(CONCAT(u.firstName, ' ', u.lastName)) like lower(CONCAT(:fullName, '%')) " +
