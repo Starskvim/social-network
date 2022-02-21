@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=social_network_test_db
-    password: '1998'
+    driver-class-name: org.h2.Driver
+    username: sa
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    password:
   jpa:
     properties:
       hibernate:
