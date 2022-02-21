@@ -1,6 +1,7 @@
 package com.starskvim.socialnetwork.service;
 
 
+import com.starskvim.socialnetwork.controller.dto.FriendDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.controller.exceptions.UserAlreadyExistsException;
 import com.starskvim.socialnetwork.controller.exceptions.UserNotFoundException;
@@ -14,8 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,6 +26,7 @@ public class SocialService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    @Transactional(readOnly = true)
     public List<UserDto> findUsers (String searchRequest){
         if(StringUtils.isEmpty(searchRequest)){
             List<User> users = userRepository.findAll();
@@ -36,6 +36,7 @@ public class SocialService {
         return users.stream().map(userMapper::toUserDto).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public UserDto findUserByLogin(String searchRequest){
         if(StringUtils.isEmpty(searchRequest)){
             throw new UserNotFoundException(searchRequest);
@@ -44,9 +45,10 @@ public class SocialService {
         return userMapper.toUserDto(user);
     }
 
-    public Set<UserDto> getUserFriends(String name) {
+    @Transactional(readOnly = true)
+    public Set<FriendDto> getUserFriends(String name) {
         User user = userRepository.getUserWithFriends(name);
-        return user.getFriends().stream().map(userMapper::toUserDto).collect(Collectors.toSet());
+        return user.getFriends().stream().map(userMapper::toFriendDto).collect(Collectors.toSet());
     }
 
     @Transactional

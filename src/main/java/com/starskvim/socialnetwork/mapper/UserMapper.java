@@ -1,10 +1,12 @@
 package com.starskvim.socialnetwork.mapper;
 
+import com.starskvim.socialnetwork.controller.dto.FriendDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.controller.dto.UserRegistrationDto;
 import com.starskvim.socialnetwork.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,5 +23,9 @@ public abstract class UserMapper {
     @Mapping(target = "password", expression = "java(bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()))")
     public abstract User toUser (UserRegistrationDto userRegistrationDto);
 
+    @Mapping(target = "friends", qualifiedByName = "friends")
     public abstract UserDto toUserDto(User user);
+
+    @Named("friends")
+    public abstract FriendDto toFriendDto(User user);
 }
