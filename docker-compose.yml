@@ -21,6 +21,8 @@ services:
       - 8228:8228
     networks:
       - SocialNetwork
+    environment:
+      - JDBC_URL=jdbc:postgresql://db:5432/postgres?currentSchema=social_network_db
 
 networks:
   SocialNetwork:

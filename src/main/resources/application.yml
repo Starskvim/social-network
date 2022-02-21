@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=social_network_db
+    url: ${JDBC_URL:jdbc:postgresql://localhost:5432/postgres?currentSchema=social_network_db}
     password: '1998'
   jpa:
     properties:

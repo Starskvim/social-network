@@ -4,7 +4,6 @@ import com.starskvim.socialnetwork.controller.dto.UserDto;
 import com.starskvim.socialnetwork.controller.dto.UserRegistrationDto;
 import com.starskvim.socialnetwork.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

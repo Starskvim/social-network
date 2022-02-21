@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userRepository.save(userMapper.toUser(registrationDto));
         } catch (DataIntegrityViolationException e){
-            if(e.getCause().getCause().getMessage().contains("повторяющееся значение ключа")){
+            if(e.getCause().getCause().getMessage().contains("duplicate key value violates unique constraint")){
                 throw new LoginIsAlreadyTakenException(registrationDto.getLogin());
             }
         }
