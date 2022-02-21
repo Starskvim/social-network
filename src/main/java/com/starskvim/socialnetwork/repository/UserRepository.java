@@ -12,9 +12,9 @@ import java.util.List;
 public interface UserRepository extends JpaRepository <User, Long > {
 
     @Query("select u from User u where " +
-            "CONCAT(u.firstName, ' ', u.lastName) like CONCAT('%', :fullName, '%') " +
-            "or CONCAT(u.lastName, ' ', u.firstName) like CONCAT('%', :fullName, '%')")
-    List<User> findAllByFullName (String fullName);  // TODO
+            "lower(CONCAT(u.firstName, ' ', u.lastName)) like lower(CONCAT(:fullName, '%')) " +
+            "or lower(CONCAT(u.lastName, ' ', u.firstName))  like lower(CONCAT(:fullName, '%'))")
+    List<User> findAllByFullName (String fullName);  // TODO для более гибких запросов лучше Criteria API/QueryDsl/GraphQL
 
     User findByLogin(String login);
 

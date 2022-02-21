@@ -16,7 +16,9 @@ public class UserRegistrationDto {
     @NotNull
     private String password;
     @Email
+    @NotNull
     private String mail;
+
     @Length.List({
             @Length(min = 3, message = "The field must be at least 3 characters"),
             @Length(max = 25, message = "The field must be less than 25 characters")

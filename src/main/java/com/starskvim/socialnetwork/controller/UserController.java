@@ -3,12 +3,7 @@ package com.starskvim.socialnetwork.controller;
 
 import com.starskvim.socialnetwork.controller.dto.FriendDto;
 import com.starskvim.socialnetwork.controller.dto.UserDto;
-import com.starskvim.socialnetwork.model.User;
 import com.starskvim.socialnetwork.service.SocialService;
-import io.swagger.annotations.ApiOperation;
-
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
